@@ -30,23 +30,23 @@ class AlphaTreesPrefs(bpy.types.AddonPreferences):
 
 class ALPHATREE_UL_SystemList(bpy.types.UIList):
     """UIlist for the particle systems"""
-    def draw_item(self, context, layout, data, item, icon, active_data, active_propname, index): 
+    def draw_item(self, context, layout, data, item, icon, active_data, active_propname, index):
         custom_icon = 'PARTICLES'
 
         if self.layout_type in {'DEFAULT', 'COMPACT'}:
             row = layout.row(align = True)
             row.prop(item, "name", text="", emboss=False, icon=custom_icon)
-            
+
             if item.show_viewport:
                 row.prop(item, "show_viewport", text="", emboss=False, icon="RESTRICT_VIEW_OFF")
             else:
                 row.prop(item, "show_viewport", text="", emboss=False, icon="RESTRICT_VIEW_ON")
-            
+
             if item.show_render:
                 row.prop(item, "show_render", text="", emboss=False, icon="RESTRICT_RENDER_OFF")
             else:
                 row.prop(item, "show_render", text="", emboss=False, icon="RESTRICT_RENDER_ON")
-            
+
         elif self.layout_type in {'GRID'}:
             layout.alignment = 'CENTER'
             layout.prop(item, "name", text="", emboss=False, icon=custom_icon)
@@ -81,7 +81,7 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                 if not sys_list:
                     row.enabled = False
                 row.operator(actions_name, text="", icon="REMOVE").action = "REMOVE"
-                
+
                 if sys_list:
                     if len(sys_list) >= 2:
                         col = column.column(align=True)
@@ -129,7 +129,7 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                     else:
                         row.prop(at, "show_particle_settings", text = "", icon = "TRIA_RIGHT")
                         row.label(text="Settings")
-                    
+
                     #materials
                     if item.selected_tree != "default.png":
 
@@ -150,7 +150,7 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                             row.label(text="Material")
 
         else:
-            
+
             imp_functions.draw_preview_enum(
                 self,
                 context,
@@ -159,7 +159,7 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                 at,
                 "alpha_trees_previews"
                 )
-            
+
             #row = layout.row()
             #row.alignment = "CENTER"
             #row.label(text = at.alpha_trees_previews[:-19])
@@ -183,7 +183,7 @@ class ALPHATREE_PT_overall_settings(bpy.types.Panel):
     def poll(cls, context):
         at = context.scene.alpha_trees
         return at.import_type == "PARTICLE"
-    
+
     def draw(self, context):
         layout = self.layout
         at = context.scene.alpha_trees
@@ -214,13 +214,13 @@ class ALPHATREE_PT_material_settings(bpy.types.Panel):
 
         elif not object.material_slots:
             return False
-        
+
         elif not object.material_slots[0].material:
             return False
-        
+
         elif not object.material_slots[0].material.use_nodes:
             return False
-        
+
         elif not object.material_slots[0].material.node_tree.nodes:
             return False
 
@@ -228,7 +228,7 @@ class ALPHATREE_PT_material_settings(bpy.types.Panel):
             _ = object.material_slots[0].material.node_tree.nodes["Alpha trees control"]
         except KeyError:
             return False
-        
+
         return True
 
     def draw(self, context):
@@ -266,7 +266,7 @@ class ALPHATREE_PT_gen_panel(bpy.types.Panel):
                     "resolution", "render_filepath", "diff_render", "nor_render", "mask_render", "overwrite", "remove_extra_masks", ], ["open_leaf_folder"]],
                 setttings_toggle=[[], [False, False,True, True, True, False, False], []]
             )
-        
+
         # else:
         #     row = layout.row()
         #     row.alignment = "RIGHT"

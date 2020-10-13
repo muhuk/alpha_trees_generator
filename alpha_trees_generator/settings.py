@@ -161,7 +161,7 @@ class ATGeneratorSettings(bpy.types.PropertyGroup):
     )
 
 class SystemSettings(bpy.types.PropertyGroup):
-    
+
     # Particle system settings
     index: IntProperty(
         default=0,
@@ -169,21 +169,21 @@ class SystemSettings(bpy.types.PropertyGroup):
     )
 
 class SystemListItem(bpy.types.PropertyGroup):
-    
+
     sys_name : StringProperty(
         name="System name",
         description="particle system name",
         default="None"
         )
-    
+
     #display
-    
+
     name: StringProperty(
         name="Name",
         description="System display name name",
         default= "Untitled"
         )
-    
+
     show_viewport : BoolProperty(
         name="Show viewport",
         default=True,
@@ -204,7 +204,7 @@ class SystemListItem(bpy.types.PropertyGroup):
         description="Settings to use for this particle system",
         update=sys_functions.psettings_update,
         )
-    
+
     selected_tree : EnumProperty(
         items=sys_functions.get_previews_from_files,
         update = sys_functions.selected_tree_update,
