@@ -11,8 +11,29 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from . import ui, settings, gen_functions, imp_functions, sys_functions, operators
-import bpy
+if "bpy" in locals():
+    import importlib
+    for mod in [
+        ui,
+        settings,
+        gen_functions,
+        imp_functions,
+        sys_functions,
+        operators
+    ]:
+        importlib.reload(mod)
+else:
+    import bpy
+    from . import (
+        ui,
+        settings,
+        gen_functions,
+        imp_functions,
+        sys_functions,
+        operators
+    )
+
+
 bl_info = {
     "name": "Alpha Trees",
     "author": "Andrew Stevenson",
@@ -32,6 +53,7 @@ items = [
     ui,
     operators,
 ]
+
 
 if "bpy" in locals():
     import imp

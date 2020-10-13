@@ -1,7 +1,18 @@
-import bpy
-import os
-from . import imp_functions, sys_functions
-from bpy.props import BoolProperty, FloatProperty, IntProperty, StringProperty, EnumProperty, CollectionProperty
+if "bpy" in locals():
+    import importlib
+    for mod in [
+        imp_functions,
+        sys_functions
+    ]:
+        importlib.reload(mod)
+else:
+    import os
+    import bpy
+    from bpy.props import BoolProperty, FloatProperty, IntProperty, StringProperty, EnumProperty, CollectionProperty
+    from . import (
+        imp_functions,
+        sys_functions
+    )
 
 
 class ATGeneratorSettings(bpy.types.PropertyGroup):

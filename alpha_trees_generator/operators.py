@@ -1,13 +1,25 @@
-import bpy
-import os
-import time
-import webbrowser
-from bpy.props import FloatProperty, IntProperty, BoolProperty
-from . import gen_functions, imp_functions, sys_functions
-from .sys_functions import get_system_vars
+if "bpy" in locals():
+    import importlib
+    for mod in [
+        gen_functions,
+        imp_functions,
+        sys_functions
+    ]:
+        importlib.reload(mod)
+else:
+    import os
+    import time
+    import webbrowser
+    import bpy
+    from bpy.props import FloatProperty, IntProperty, BoolProperty
+    from . import (
+        gen_functions,
+        imp_functions,
+        sys_functions
+    )
+
 
 # Generator
-
 
 class ALPHATREE_OT_set_up_scene(bpy.types.Operator):
     """Set up scene for rendering"""
@@ -328,7 +340,7 @@ class ALPHATREE_OT_sys_list_actions(bpy.types.Operator):
     )
 
     def execute(self, context):
-        sys_list, sys_settings, index, psystems, item = get_system_vars(self, context)
+        sys_list, sys_settings, index, psystems, item = sys_functions.get_system_vars(self, context)
 
         if self.action == "ADD":
 
@@ -384,7 +396,7 @@ class ALPHATREE_OT_new_settings(bpy.types.Operator):
 
     def execute(self, context):
 
-        item = get_system_vars(self, context)[-1]
+        item = sys_functions.get_system_vars(self, context)[-1]
         at = context.scene.alpha_trees
         object = context.active_object
         selected = object.select_get()

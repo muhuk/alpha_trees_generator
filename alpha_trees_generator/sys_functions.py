@@ -1,7 +1,15 @@
-import bpy
-import os
-from . import imp_functions
-from .gen_functions import xprint
+if "bpy" in locals():
+    import importlib
+    for mod in [
+        imp_functions
+    ]:
+        importlib.reload(mod)
+else:
+    import os
+    import bpy
+    from . import (
+        imp_functions
+    )
 
 
 def get_system_vars(self, context):

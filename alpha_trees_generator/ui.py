@@ -1,11 +1,23 @@
-import bpy
-from . import gen_functions, imp_functions, sys_functions, operators, settings
-from .operators import (
-    ALPHATREE_OT_change_tree,
-    ALPHATREE_OT_reload_previews,
-    ALPHATREE_OT_multi_import,
-    ALPHATREE_OT_sys_list_actions,
-    ALPHATREE_OT_new_settings)
+if "bpy" in locals():
+    import importlib
+    for mod in [
+        gen_functions,
+        imp_functions,
+        sys_functions,
+        operators,
+        settings
+    ]:
+        importlib.reload(mod)
+else:
+    import bpy
+    from . import (
+        gen_functions,
+        imp_functions,
+        sys_functions,
+        operators,
+        settings
+    )
+
 
 class AlphaTreesPrefs(bpy.types.AddonPreferences):
     bl_idname = __package__
@@ -26,7 +38,7 @@ class AlphaTreesPrefs(bpy.types.AddonPreferences):
 #     def draw(self, context):
 #         layout = self.layout
 
-#         layout.operator(ALPHATREE_OT_multi_import.bl_idname, text="Multi import", icon = "DOCUMENTS")
+#         layout.operator(operators.ALPHATREE_OT_multi_import.bl_idname, text="Multi import", icon = "DOCUMENTS")
 
 class ALPHATREE_UL_SystemList(bpy.types.UIList):
     """UIlist for the particle systems"""
@@ -75,7 +87,7 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                 row.template_list("ALPHATREE_UL_SystemList", "The_List", context.object, "sys_list", context.object.sys_settings, "index")
                 column = row.column()
                 col = column.column(align=True)
-                actions_name = ALPHATREE_OT_sys_list_actions.bl_idname
+                actions_name = operators.ALPHATREE_OT_sys_list_actions.bl_idname
                 col.operator(actions_name, text="", icon="ADD").action = "ADD"
                 row = col.row(align = True)
                 if not sys_list:
@@ -95,11 +107,11 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                     row = layout.row(align=True)
                     if item.particle_settings == "NONE":
                         row.prop(item, "particle_settings", text="", icon="SETTINGS", icon_only=True)
-                        row.operator(ALPHATREE_OT_new_settings.bl_idname, text="New settings", icon="ADD")
+                        row.operator(operators.ALPHATREE_OT_new_settings.bl_idname, text="New settings", icon="ADD")
                         return
 
                     row.prop(item, "particle_settings", text="", icon="SETTINGS")
-                    row.operator(ALPHATREE_OT_new_settings.bl_idname, text="", icon="ADD")
+                    row.operator(operators.ALPHATREE_OT_new_settings.bl_idname, text="", icon="ADD")
                     row.operator(operators.ALPHATREE_OT_remove_settings.bl_idname, text="", icon="REMOVE")
 
                     box = layout.box()
@@ -155,7 +167,7 @@ class ALPHATREE_PT_import_panel(bpy.types.Panel):
                 self,
                 context,
                 layout,
-                [ALPHATREE_OT_change_tree, ALPHATREE_OT_reload_previews, ALPHATREE_OT_multi_import],
+                [operators.ALPHATREE_OT_change_tree, operators.ALPHATREE_OT_reload_previews, operators.ALPHATREE_OT_multi_import],
                 at,
                 "alpha_trees_previews"
                 )
