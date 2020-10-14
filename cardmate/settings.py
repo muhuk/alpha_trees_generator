@@ -1,5 +1,9 @@
 # <pep8-80 compliant>
 
+# CardMate is a Blender addon that helps with baking billboards.
+# Copyright (C) 2020  Atamert Ölçgen
+#
+# This project is a fork of alpha_trees_generator.
 # Copyright (C) 2020  Andrew Stevenson
 #
 # This program is free software: you can redistribute it and/or modify

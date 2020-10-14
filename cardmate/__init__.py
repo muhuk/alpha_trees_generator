@@ -1,5 +1,9 @@
 # <pep8-80 compliant>
 
+# CardMate is a Blender addon that helps with baking billboards.
+# Copyright (C) 2020  Atamert Ölçgen
+#
+# This project is a fork of alpha_trees_generator.
 # Copyright (C) 2020  Andrew Stevenson
 #
 # This program is free software: you can redistribute it and/or modify
@@ -39,13 +43,14 @@ else:
 
 
 bl_info = {
-    "name": "Alpha Trees",
-    "author": "Andrew Stevenson",
-    "description": "See: https://blenderartists.org/t/alpha-trees-wip-nature-addon/1250694/48",
+    "name": "CardMate",
+    "author": "Atamert Ölçgen",
+    "description": "This project is forked from alpha_trees_generator.  " +
+                   "See: https://blenderartists.org/t/alpha-trees-wip-nature-addon/1250694/48",
     "blender": (2, 90, 0),
     "version": (0, 7, 0),
     "location": "",
-    "tracker_url": "https://github.com/muhuk/alpha_trees_generator",
+    "tracker_url": "https://github.com/muhuk/cardmate",
     "warning": "",
     "category": "Image"
 }
