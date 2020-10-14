@@ -45,7 +45,7 @@ else:
 bl_info = {
     "name": "CardMate",
     "author": "Atamert Ölçgen",
-    "description": "This project is forked from alpha_trees_generator.  " +
+    "description": "This project is forked from alpha_trees_generator.  "
                    "See: https://blenderartists.org/t/alpha-trees-wip-nature-addon/1250694/48",
     "blender": (2, 90, 0),
     "version": (0, 7, 0),
